@@ -7,6 +7,15 @@
   Implement a linked list class with methods: insert, includes, to string
   Use TypeScript
 
+## Features
+
+- [x] Linked list class
+- [x] Head/start property
+- [x] insert()
+- [x] includes()
+- [x] toString()
+- [x] testing()
+
 ## Approach
 
 As a class we went over the concept together, and constructed and tested it as we went. My approach was to picture the problem in a less organized form of objects with properties containing other objects as a concept which helped me piece together the rest inside that idea.
