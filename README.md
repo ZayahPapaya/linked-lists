@@ -2,6 +2,15 @@
 
 [Assignment instructions](https://codefellows.github.io/common_curriculum/data_structures_and_algorithms/Code_401/class-05/LAB)
 
+## Challenge
+
+  Implement a linked list class with methods: insert, includes, to string
+  Use TypeScript
+
+## Approach
+
+As a class we went over the concept together, and constructed and tested it as we went. My approach was to picture the problem in a less organized form of objects with properties containing other objects as a concept which helped me piece together the rest inside that idea.
+
 ## TypeScript Instructions
 
 - Verify your types are correct with `npm run check`
