@@ -14,7 +14,7 @@ describe("linked list", () => {
     expect(list.includes("Sam")).toBe(true);
     expect(list.includes("Merry")).toBe(true);
     expect(list.includes("Pippin")).toBe(true);
-    //expect(list.includes("Bilbo")).toBe(true);
+    expect(list.includes("Bilbo")).toBe(false);
     //expect(list.includes("Frodo")).toBe(true);
     console.log(JSON.stringify(list));
   });
