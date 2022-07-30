@@ -1,26 +1,16 @@
 import { Collection, display } from "./Collection";
 
-// let name: type = value;
-
 export class LinkedList<T> implements Collection<T> {
-  // TODO
-  head: Node<T> | undefined; // also known as start
+
+  head: Node<T> | undefined;
   butt: Node<T> | undefined;
-  // newNode{
-  //   item: item,
-  //   next: this.head
-  // }
 
   // check for edge cases of fails to find node, before/after head or butt, 
 
 
   insert(item: T) {
-    const newNode = {
-      item: item,
-      next: this.head,
-    };
+    const newNode = { item, next: this.head };
     this.head = newNode;
-    //
     if (this.butt === undefined) {
       this.butt = newNode;
     }
@@ -64,10 +54,7 @@ export class LinkedList<T> implements Collection<T> {
 
   append(item: T) {
     if (this.butt) {
-      const newNode = {
-        item: item,
-        next: undefined,
-      };
+      const newNode = { item, next: undefined };
       this.butt.next = newNode;
       this.butt = newNode;
     } else {
