@@ -73,6 +73,23 @@ export class LinkedList<T> implements Collection<T> {
     return false;
   };
 
+  kthFromEnd(target: number): any {
+    let tracker = this.head;
+    let listLength = 0;
+    while (tracker !== undefined) {
+      listLength += 1;
+      tracker = tracker.next;
+    }
+    if(target <= 0) { throw new Error };
+    const loop = listLength - target;
+    if(loop < 0) { throw new Error };
+    tracker = this.head;
+    for(let i = 0; i < loop; i++) {
+      tracker = tracker?.next;
+    }
+    return tracker?.item;
+  }
+
   toString(): string {
     // for each item, get its string using display(item)
     //put it in { }
