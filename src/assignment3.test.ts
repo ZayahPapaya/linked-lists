@@ -58,4 +58,13 @@ describe("Linked List", () => {
     expect(list.kthFromEnd(1)).toEqual("Lumbridge");
   });
 
+  
+  it("Request is 0", () => {
+    const list = new LinkedList<string>();
+
+    list.insert("Lumbridge");
+
+    expect(() => { list.kthFromEnd(0) }).toThrow();
+  });
+
 });

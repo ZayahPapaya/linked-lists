@@ -4,13 +4,37 @@ export class LinkedList<T> implements Collection<T> {
 
   head: Node<T> | undefined;
   butt: Node<T> | undefined;
+  size = 0;
 
-  // check for edge cases of fails to find node, before/after head or butt, 
+  // check for edge cases of fails to find node, before/after head or butt,
+
+  static zip<T>(ll1: LinkedList<T>, ll2: LinkedList<T>): LinkedList<T> {
+    const zipped = new LinkedList<T>();
+    let duration;
+    let tracker1 = ll1.head;
+    let tracker2 = ll2.head;
+    ll1.size > ll2.size ? duration = ll1.size : duration = ll2.size;
+    //console.log('DURATION:', duration, ll1, ll2);
+    for (let i = 0; i < duration; i++) {
+      if (tracker1?.item !== undefined) {
+        zipped.append(tracker1.item);
+        tracker1 = tracker1.next;
+      }
+      if (tracker2?.item !== undefined) {
+        zipped.append(tracker2.item);
+        tracker2 = tracker2.next;
+      }
+    }
+    // check for which list's size is greater and use that for the tracker. Then walk through the list(s) at the same time and use insert on zipped alternating. Use a check for if the node exists in the event of null.
+    return zipped;
+  }
+
 
 
   insert(item: T) {
     const newNode = { item, next: this.head };
     this.head = newNode;
+    this.size += 1;
     if (this.butt === undefined) {
       this.butt = newNode;
     }
@@ -31,6 +55,7 @@ export class LinkedList<T> implements Collection<T> {
       }
       tracker = tracker.next;
     }
+    this.size += 1;
     if (found === false) {
       throw new Error('Could not find target node');
     }
@@ -47,6 +72,7 @@ export class LinkedList<T> implements Collection<T> {
       }
       tracker = tracker.next;
     }
+    this.size += 1;
     if (found === false) {
       throw new Error('Could not find target node');
     }
@@ -57,6 +83,7 @@ export class LinkedList<T> implements Collection<T> {
       const newNode = { item, next: undefined };
       this.butt.next = newNode;
       this.butt = newNode;
+      this.size += 1;
     } else {
       this.insert(item);
     }
@@ -75,16 +102,17 @@ export class LinkedList<T> implements Collection<T> {
 
   kthFromEnd(target: number): any {
     let tracker = this.head;
-    let listLength = 0;
-    while (tracker !== undefined) {
-      listLength += 1;
-      tracker = tracker.next;
-    }
-    if(target <= 0) { throw new Error };
-    const loop = listLength - target;
-    if(loop < 0) { throw new Error };
+    // let listLength = 0;
+    // while (tracker !== undefined) {
+    //   listLength += 1;
+    //   tracker = tracker.next;
+    // }
+    if (this.size <= 0 || target < 1) { throw new Error };
+    //console.log(this.size);
+    const loop = this.size - target;
+    if (loop < 0) { throw new Error };
     tracker = this.head;
-    for(let i = 0; i < loop; i++) {
+    for (let i = 0; i < loop; i++) {
       tracker = tracker?.next;
     }
     return tracker?.item;
