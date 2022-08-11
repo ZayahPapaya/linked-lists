@@ -118,6 +118,50 @@ export class LinkedList<T> implements Collection<T> {
     return tracker?.item;
   }
 
+  push(item: T) {
+    this.insert(item);
+  }
+
+  NQ(item: T) {
+    this.append(item);
+  }
+
+  peek(): T {
+    if (this.head === undefined) {
+      throw new Error('Peeking on empty');
+    }
+    return this.head?.item;
+  }
+
+  remove(): T {
+    //do the stuff
+    if (this.head) {
+      let target = this.head.item;
+      this.head = this.head.next;
+      this.size--;
+      return target;
+    } else {
+      throw new Error('Removing from empty');
+    }
+  }
+
+  DQ(): T {
+    return this.remove();
+  }
+
+  pop(): T {
+    return this.remove();
+  }
+
+  get length(): number {
+    return this.size;
+  }
+
+  empty(): boolean {
+    // return this.size === 0 ? true : false; // other way to do this
+    return this.head ? true : false;
+  }
+
   toString(): string {
     // for each item, get its string using display(item)
     //put it in { }
