@@ -2,8 +2,8 @@ import { Collection, display } from "./Collection";
 
 export class LinkedList<T> implements Collection<T> {
 
-  head: Node<T> | undefined;
-  butt: Node<T> | undefined;
+  head: Node<T> | undefined; // lemon
+  butt: Node<T> | undefined; // orange
   size = 0;
 
   // check for edge cases of fails to find node, before/after head or butt,
@@ -32,11 +32,11 @@ export class LinkedList<T> implements Collection<T> {
 
 
   insert(item: T) {
-    const newNode = { item, next: this.head };
-    this.head = newNode;
+    const newNode = { item, next: this.head };//nickel -> penny
+    this.head = newNode; // nickel -> penny
     this.size += 1;
     if (this.butt === undefined) {
-      this.butt = newNode;
+      this.butt = newNode; // nickel
     }
   }
 
@@ -133,24 +133,51 @@ export class LinkedList<T> implements Collection<T> {
     return this.head?.item;
   }
 
-  remove(): T {
+  remove(filter?: (t: T) => boolean): T {
     //do the stuff
-    if (this.head) {
-      let target = this.head.item;
-      this.head = this.head.next;
-      this.size--;
-      return target;
-    } else {
+    if (!this.head) {
       throw new Error('Removing from empty');
     }
+    if (typeof filter == 'function') {
+      let tracker = this.head;
+      let previous = undefined;
+      while (tracker !== undefined) {
+        //console.log('Tracker:', tracker);
+        if (filter(tracker.item)) { // filter(tracker.item)
+          if (this.head === tracker) { // if very first item is the target
+            ////////////////////
+            let target = this.head.item;
+            this.head = this.head.next;
+            this.size--;
+            return target;
+            ////////////////////
+          } else if (previous !== undefined) { // if any other item is the target
+            let target = tracker.item;
+            console.log(target); // this came up with the wrong thing, check which this is targeting
+            previous.next = tracker.next;
+            return target;
+          }
+        }
+        previous = tracker;
+        if (tracker.next) { // if the tracker is not the final item in the list
+          tracker = tracker.next;
+        }
+      }
+    }
+    ////////////////////
+    let target = this.head.item;
+    this.head = this.head.next;
+    this.size--;
+    return target;
+    ////////////////////
   }
 
-  DQ(): T {
-    return this.remove();
+  DQ(filter?: (t: T) => boolean): T { // use filter: (t: T) => boolean
+    return this.remove(filter);
   }
 
-  pop(): T {
-    return this.remove();
+  pop(filter?: (t: T) => boolean): T {
+    return this.remove(filter);
   }
 
   get length(): number {
@@ -158,7 +185,7 @@ export class LinkedList<T> implements Collection<T> {
   }
 
   empty(): boolean {
-    // return this.size === 0 ? true : false; // other way to do this
+    //return this.size === 0 ? true : false; // other way to do this
     return this.head ? true : false;
   }
 
